@@ -1,0 +1,13 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: sink-connector-test
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: connect-cluster-test
+spec:
+  class: org.apache.kafka.connect.file.FileStreamSinkConnector
+  tasksMax: 2
+  config:
+    file: "/tmp/my-file"
+    topics: test

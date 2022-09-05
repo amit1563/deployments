@@ -1,0 +1,24 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: elasticsearch-sink-connector-orders
+  namespace: my-kafka-project
+  labels:
+    strimzi.io/cluster: connect-cluster-test
+spec:
+  class: io.confluent.connect.elasticsearch.ElasticsearchSinkConnector
+  config:
+    connection.url: test-eck-es-http.test-elastic.svc:9200
+    connection.username: elastic
+    connection.password: De2f900Mcdt666i3mI5TISi9
+    tasks.max:  1
+    topics: "test-new"
+    behavior.on.null.values: "delete"
+    behavior.on.malformed.documents: "warn"
+    write.method: "upsert"
+    compact.map.entries: false
+    type.name: "_doc"
+    schema.ignore: true
+    value.converter: "org.apache.kafka.connect.json.JsonConverter"
+    value.converter.schemas.enable: "false"
+    key.ignore: "true"

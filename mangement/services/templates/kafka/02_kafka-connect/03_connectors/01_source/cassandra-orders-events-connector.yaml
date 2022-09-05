@@ -1,0 +1,18 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: cassandra-source-connector-orders
+  namespace: my-kafka-project
+  labels:
+    strimzi.io/cluster: connect-cluster-test
+spec:
+  class: com.datamountaineer.streamreactor.connect.cassandra.source.CassandraSourceConnector
+  tasksMax: 1
+  config:
+    connect.cassandra.contact.points: "172.19.0.3"
+    connect.cassandra.port: 9042
+    connect.cassandra.key.space: "demo"
+    connect.cassandra.import.mode: "incremental"
+    connect.cassandra.consistency.level: "QUORUM"
+    connect.cassandra.kcql: "INSERT INTO test-new SELECT * FROM orders IGNORE created PK created INCREMENTALMODE=TIMEUUID WITHUNWRAP WITHFORMAT JSON"
+    connect.progress.enabled: true

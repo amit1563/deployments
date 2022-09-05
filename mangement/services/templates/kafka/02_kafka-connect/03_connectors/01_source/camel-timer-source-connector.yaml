@@ -1,0 +1,13 @@
+apiVersion:  kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: camel-timer-source-connector
+  namespace: my-kafka-project
+  labels:
+    strimzi.io/cluster: connect-cluster-test
+spec:
+  class: org.apache.camel.kafkaconnector.timersource.CamelTimersourceSourceConnector
+  tasksMax: 1
+  config:
+    camel.kamelet.timer-source.message: 'Hello world'
+    topic: test

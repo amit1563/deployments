@@ -1,0 +1,12 @@
+favoriteDrink: coffee
+
+# Dm elastic cluster settings
+test_elastic: 
+  replicas: 1
+  node_ram: 1Gi
+  node_java_heap: -Xms1g -Xmx1g
+  data_node_cpu: 1000m
+  master_node_cpu: 1000m
+  data_node_storage: 2Gi
+  master_node_storage: 1Gi
+  storage_class_name: "standard"
